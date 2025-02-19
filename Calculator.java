@@ -1,20 +1,33 @@
 public class Calculator {
     public static void main(String[] args) {
+        // Check if the required arguments are passed
         if (args.length < 3) {
-            System.out.println("Usage: java Calculator <add/sub> <num1> <num2>");
+            System.out.println("Error: Missing arguments. Usage: java Calculator <operation> <num1> <num2>");
+            System.exit(1);
+        }
+
+        String operation = args[0].trim().toLowerCase();
+        int num1, num2;
+
+        try {
+            num1 = Integer.parseInt(args[1]);
+            num2 = Integer.parseInt(args[2]);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid number format. Please enter valid integers.");
+            System.exit(1);
             return;
         }
-        
-        String operation = args[0];
-        int num1 = Integer.parseInt(args[1]);
-        int num2 = Integer.parseInt(args[2]);
 
-        if ("add".equals(operation)) {
-            System.out.println("Result: " + (num1 + num2));
-        } else if ("sub".equals(operation)) {
-            System.out.println("Result: " + (num1 - num2));
-        } else {
-            System.out.println("Invalid operation! Use 'add' or 'sub'.");
+        // Perform the operation
+        switch (operation) {
+            case "add":
+                System.out.println("Result: " + (num1 + num2));
+                break;
+            case "sub":
+                System.out.println("Result: " + (num1 - num2));
+                break;
+            default:
+                System.out.println("Error: Invalid operation! Use 'add' or 'sub'.");
         }
     }
 }
